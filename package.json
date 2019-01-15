@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
@@ -16,7 +16,7 @@
     "url": "https://github.com/6peiweb/virtual-dom/issues"
   },
   "homepage": "https://github.com/6peiweb/virtual-dom#readme",
-  "dependencies": {
+  "devDependencies": {
     "html-webpack-plugin": "^3.2.0",
     "webpack": "^4.28.4"
   }
