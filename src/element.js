@@ -1,37 +1,19 @@
-import _ from './utils'
-
-class Element {
-  constructor(tagName, attrs, children) {
-    if(_.isArray(attrs)) {
-      children = attrs
-      attrs = {}
-    }
-    this.tagName =  tagName
-    this.attrs = attrs || {}
-    this.children = children
-    this.key = attrs ? attrs.key : null
+function Element (tagName, props, children) {
+  if (!(this instanceof Element)) {
+    return new Element(tagName, props, children)
   }
 
-  render() {
-    let el = document.createElement(this.tagName)
-    let attrs = this.attrs
-    for (let attrName in attrs) {
-      let attrValue = attrs[attrName]
-      _.setAttr(el, attrName, attrValue)
+  this.tagName = tagName
+  this.props = props || {}
+  this.children = children || []
+  this.key = props ? props.key : undefined
+
+  let count = 0
+  this.children.forEach(function (child) {
+    if (child instanceof Element) {
+      count += child.count
     }
-
-    let children = this.children || []
-    children.forEach(child => {
-      let childEl = child instanceof Element
-        ? child.render()
-        : document.createTextNode(child)
-      el.appendChild(childEl)
-    })
-    return el
-  }
-
-}
-
-export default (tagName, attrs, children) => {
-  return new Element(tagName, attrs, children)
+    count ++
+  })
+  this.count = count
 }
